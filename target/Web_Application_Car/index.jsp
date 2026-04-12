@@ -1,12 +1,38 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: System Administrator
-  Date: 10.04.2026
-  Time: 14:18:43
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="org.w3c.dom.stylesheets.LinkStyle" %>
+<%@ page import="java.util.List" %>
+<%@ page import="org.example.model.Car" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <style>
+    fieldset {
+        width: fit-content; /* Рамка подстроится под ширину формы */
+    }
+
+    form button,
+    form input[type="submit"] {
+        width: 300px; /* Укажите нужную вам ширину в пикселях */
+        height: 40px; /* Одинаковая высота для всех */
+        padding: 5px;
+        margin-top: 10px;
+        cursor: pointer;
+        box-sizing: border-box; /* Чтобы padding не раздувал кнопку */
+    }
+
+    table {
+        width: 50%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    th, td {
+        border: 1px solid black;
+        padding: 8px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
     /* Стилизуем форму как сетку */
     .my-form {
         display: grid;
@@ -27,16 +53,45 @@
 </style>
 <html>
 <head>
-    <title>Title</title>
+    <title>База данных автомобилей</title>
     <h1>База данных автомобилей</h1>
-    <form class="my-form" action="save" method="get">
-        Название авто:<input name="name" type="text"/></br>
-        Тип:<input name="type" type="text"/>
-        <input type="submit">
-    </form>
+    <fieldset style="border: 2px solid #ccc; padding: 20px; border-radius: 8px;">
+        <h2>Добавление автомобиля в базу</h2>
+        <form class="my-form" action="register" method="post">
+            Название авто:<input name="name" type="text" required placeholder="Напр: BMW"/></br>
+            Тип:<input name="type" type="text" required placeholder="Напр: Седан"/>
+            <input type="submit" value="Сохранить автомобиль">
+        </form>
+    </fieldset>
+
+
+    <fieldset style="border: 2px solid #ccc; padding: 20px; border-radius: 8px;">
+        <form action="findCar" method="get">
+            <h2>Поиск записи</h2>
+            Введите номер записи:<input type="text" name="id" required placeholder="Напр: 2"/>
+            <input type="submit" value="Найти">
+        </form>
+
+        <%Car car = (Car) request.getAttribute("car");%>
+        <% if (car != null) {%>
+        <h3>Результаты поиска</h3>
+        <p>Номер записи:<%= car.getId()%></p>
+        <p>Название:<%= car.getName()%></p>
+        <p>Тип:<%= car.getType()%></p>
+        <p>Дата создания<%= car.getCreateDateTime()%></p>
+        <p>Дата обновления<%= car.getUpdateDateTime()%></p>
+        <%}%>
+
+    </fieldset>
+
+
+    <fieldset style="border: 2px solid #ccc; padding: 20px; border-radius: 8px;">
+        <form action="showAll" method="post">
+            <button type="submit">Посмотреть базу автомобилей</button>
+        </form>
+    </fieldset>
+
 </head>
-
 <body>
-
 </body>
 </html>
