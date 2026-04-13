@@ -21,12 +21,19 @@ import java.util.List;
  *
  */
 public class findCar extends HttpServlet {
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         CarDAO carDAO = new CarDAOImpl(HibernateUtil.getEntityManager());
        String id = request.getParameter("id");
         Car car = carDAO.get(Integer.parseInt(id));
-        request.setAttribute("car",car);
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
-        dispatcher.forward(request,response);
+        if (car == null) {
+            request.setAttribute("found", "false"); // Кладем флаг во внутренний атрибут
+            request.getRequestDispatcher("index.jsp").forward(request, response);
+        }
+        else{
+            request.setAttribute("car",car);
+            request.setAttribute("id",id);
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
+            dispatcher.forward(request,response);
+        }
     }
 }

@@ -21,16 +21,27 @@
         <sql>
             INSERT INTO car (brand, model, createDateTime)
             VALUES
-                ('Toyota', 'Camry', NOW()),
-                ('BMW', 'X5', NOW()),
-                ('Tesla', 'Model 3', NOW()),
-                ('Mercedes-Benz', 'E-Class', NOW()),
-                ('Ford', 'F-150', NOW()),
-                ('Audi', 'A6', NOW()),
-                ('Hyundai', 'Tucson', NOW()),
-                ('Volkswagen', 'Golf', NOW()),
-                ('Porsche', '911', NOW()),
-                ('Honda', 'CR-V', NOW());
+                ('Kia', 'Sportage', NOW()), ('Kia', 'Rio', NOW()),
+                ('Nissan', 'Qashqai', NOW()), ('Nissan', 'X-Trail', NOW()),
+                ('Mazda', 'CX-5', NOW()), ('Mazda', '6', NOW()),
+                ('Lexus', 'RX', NOW()), ('Lexus', 'NX', NOW()),
+                ('Toyota', 'RAV4', NOW()), ('Toyota', 'Corolla', NOW()),
+                ('BMW', 'X3', NOW()), ('BMW', '3 Series', NOW()),
+                ('Mercedes-Benz', 'C-Class', NOW()), ('Mercedes-Benz', 'GLC', NOW()),
+                ('Audi', 'Q5', NOW()), ('Audi', 'A4', NOW()),
+                ('Ford', 'Focus', NOW()), ('Ford', 'Explorer', NOW()),
+                ('Chevrolet', 'Tahoe', NOW()), ('Chevrolet', 'Camaro', NOW()),
+                ('Volkswagen', 'Tiguan', NOW()), ('Volkswagen', 'Passat', NOW()),
+                ('Skoda', 'Octavia', NOW()), ('Skoda', 'Kodiaq', NOW()),
+                ('Volvo', 'XC90', NOW()), ('Volvo', 'XC60', NOW()),
+                ('Land Rover', 'Range Rover', NOW()), ('Land Rover', 'Defender', NOW()),
+                ('Jeep', 'Grand Cherokee', NOW()), ('Jeep', 'Wrangler', NOW()),
+                ('Subaru', 'Forester', NOW()), ('Subaru', 'Outback', NOW()),
+                ('Mitsubishi', 'Outlander', NOW()), ('Mitsubishi', 'Pajero', NOW()),
+                ('Renault', 'Duster', NOW()), ('Renault', 'Logan', NOW()),
+                ('Peugeot', '3008', NOW()), ('Peugeot', '5008', NOW()),
+                ('Tesla', 'Model Y', NOW()), ('Tesla', 'Model S', NOW());
+
         </sql>
     </changeSet>
 </databaseChangeLog>

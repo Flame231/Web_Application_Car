@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="1" author="Oleg">
+        <createTable tableName="car">
+            <column name="id" type="INT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="brand" type="VARCHAR(255)"/>
+            <column name="model" type="VARCHAR(255)"/>
+            <column name="createDateTime" type="TIMESTAMP"/>
+            <column name="updateDateTime" type="TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="2" author="Oleg">
+        <sql>
+            INSERT INTO car (brand, model, createDateTime)
+            VALUES
+                ('Toyota', 'Camry', NOW()),
+                ('BMW', 'X5', NOW()),
+                ('Tesla', 'Model 3', NOW()),
+                ('Mercedes-Benz', 'E-Class', NOW()),
+                ('Ford', 'F-150', NOW()),
+                ('Audi', 'A6', NOW()),
+                ('Hyundai', 'Tucson', NOW()),
+                ('Volkswagen', 'Golf', NOW()),
+                ('Porsche', '911', NOW()),
+                ('Honda', 'CR-V', NOW());
+        </sql>
+    </changeSet>
+</databaseChangeLog>
