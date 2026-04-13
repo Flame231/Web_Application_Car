@@ -16,10 +16,12 @@ import java.io.IOException;
  */
 public class registerCar extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
         String name = request.getParameter("name");
         String type = request.getParameter("type");
         CarService carService = new CarServiceImpl();
         carService.registerCar(new Car(name, type));
-        response.sendRedirect("index.jsp");
+        response.sendRedirect("index.jsp?saved=true");
     }
 }

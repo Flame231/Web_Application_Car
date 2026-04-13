@@ -55,14 +55,32 @@
 <head>
     <title>База данных автомобилей</title>
     <h1>База данных автомобилей</h1>
-    <fieldset style="border: 2px solid #ccc; padding: 20px; border-radius: 8px;">
+    <fieldset style="border: 2px solid #ccc; padding: 20px; border-radius: 8px; max-width: 400px;">
         <h2>Добавление автомобиля в базу</h2>
         <form class="my-form" action="registerCar" method="post">
-            Марка:<input name="name" type="text" required placeholder="Напр: BMW"/></br>
-            Модель:<input name="type" type="text" required placeholder="Напр: Седан"/>
-            <input type="submit" value="Сохранить автомобиль">
+            Марка:<br/>
+            <div>
+                <input name="name" type="text" required placeholder="Напр: BMW" style="width: 100%; margin-bottom: 10px;"/>
+            </div>
+            Модель:<br/>
+            <div>
+                <input name="type" type="text" required placeholder="Напр: Седан" style="width: 100%; margin-bottom: 10px;"/>
+            </div>
+
+            <!-- Кнопку в отдельный блок -->
+            <div style="margin-top: 10px; display: block;">
+                <input type="submit" value="Сохранить автомобиль")/>
+            </div>
+
+            <% if ("true".equals(request.getParameter("saved"))) { %>
+            <!-- Сообщению даем верхний отступ, чтобы оно не липло к кнопке -->
+            <div style="color: green; font-weight: bold; margin-top: 15px; display: block;">
+                Запись сохранена!
+            </div>
+            <% } %>
         </form>
     </fieldset>
+
 
     <%Car car = (Car) request.getAttribute("car");%>
     <fieldset style="border: 2px solid #ccc; padding: 20px; border-radius: 8px;">
@@ -92,7 +110,7 @@
             <div><input type="submit" value="Удалить запись" formaction="removeCar"></div>
             <% if ("true".equals(request.getParameter("deleted"))) { %>
             <div style="color: green; font-weight: bold;">
-                Запись успешно удалена!
+                Запись удалена!
             </div>
             <% } %>
         </form>
