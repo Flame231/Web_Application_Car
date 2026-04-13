@@ -1,5 +1,7 @@
 package org.example.controller;
 
+import org.example.connector.HibernateUtil;
+import org.example.dao.CarDAOImpl;
 import org.example.model.Car;
 import org.example.service.CarService;
 import org.example.service.CarServiceImpl;
@@ -22,7 +24,7 @@ public class showAllCars extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
-        CarService carService = new CarServiceImpl();
+        CarService carService = new CarServiceImpl(new CarDAOImpl(HibernateUtil.getEntityManager()));
         List<Car> carSet = carService.showAllCars();
         request.setAttribute("carList",carSet);
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/CarsDatabase.jsp");

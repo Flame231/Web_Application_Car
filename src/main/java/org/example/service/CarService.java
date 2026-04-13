@@ -9,4 +9,6 @@ public interface CarService {
     void registerCar(Car car);
 
     List<Car> showAllCars();
+
+    List<Car> showCarsByBrand(String brand);
 }

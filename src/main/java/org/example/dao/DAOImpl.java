@@ -28,11 +28,11 @@ public class DAOImpl<T> implements DAO<T> {
     }
 
     @Override
-    public T get(Serializable id) {
+    public T get(Serializable id){
         T t = null;
         try {
             t = em.find(tclass, id);
-        } catch (HibernateException e) {
+        } catch (Exception e) {
         }
         return t;
     }
@@ -53,7 +53,7 @@ public class DAOImpl<T> implements DAO<T> {
             em.getTransaction().begin();
             em.remove(get(id));
             em.getTransaction().commit();
-        } catch (HibernateException e) {
+        } catch (Exception e) {
         }
     }
 }

@@ -1,5 +1,7 @@
 package org.example.controller;
 
+import org.example.connector.HibernateUtil;
+import org.example.dao.CarDAOImpl;
 import org.example.model.Car;
 import org.example.service.CarService;
 import org.example.service.CarServiceImpl;
@@ -20,7 +22,7 @@ public class registerCar extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         String name = request.getParameter("name");
         String type = request.getParameter("type");
-        CarService carService = new CarServiceImpl();
+        CarService carService = new CarServiceImpl(new CarDAOImpl(HibernateUtil.getEntityManager()));
         carService.registerCar(new Car(name, type));
         response.sendRedirect("index.jsp?saved=true");
     }

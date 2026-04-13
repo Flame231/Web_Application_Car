@@ -5,7 +5,7 @@ import java.io.Serializable;
 public interface DAO <T>{
     void save(T t);
 
-    T get(Serializable id);
+    T get(Serializable id) ;
 
     void update(T t);
 

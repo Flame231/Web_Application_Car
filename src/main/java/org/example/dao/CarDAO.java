@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface CarDAO extends DAO<Car>{
     List<Car> getCarList();
+    List<Car> getCarsByBrand(String brand);
 }
