@@ -65,9 +65,9 @@
     <tr>
         <td><%= car.getId() %>
         </td>
-        <td><%= car.getName() %>
+        <td><%= car.getBrand() %>
         </td>
-        <td><%= car.getType() %>
+        <td><%= car.getModel() %>
         </td>
         <td><%= car.getCreateDateTime() %>
         </td>

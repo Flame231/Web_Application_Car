@@ -24,11 +24,14 @@
         <artifactId>liquibase-maven-plugin</artifactId>
         <version>4.27.0</version> <!-- или твоя версия -->
         <configuration>
-          <propertyFile>liquibase.properties</propertyFile>
+        <propertyFile>liquibase.properties</propertyFile>
+          <searchPath>src/main/resources/</searchPath>
         </configuration>
       </plugin>
+
       <!-- Секция с плагинами теперь пуста или содержит стандартные плагины сборки -->
     </plugins>
+
   </build>
 
   <dependencies>

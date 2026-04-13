@@ -20,10 +20,10 @@ public class Car {
     private Integer id;
 
     @Column
-    private String name;
+    private String brand;
 
     @Column
-    private String type;
+    private String model;
 
     @CreationTimestamp
     private Timestamp createDateTime;
@@ -32,9 +32,9 @@ public class Car {
     private Timestamp updateDateTime;
 
 
-    public Car(String name, String type) {
-        this.name = name;
-        this.type = type;
+    public Car(String brand, String model) {
+        this.brand = brand;
+        this.model = model;
     }
 
 }

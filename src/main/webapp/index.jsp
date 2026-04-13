@@ -76,8 +76,8 @@
         <% if (car != null) {%>
         <h3>Результаты поиска</h3>
         <p>Номер записи:<%= car.getId()%></p>
-        <p>Название:<%= car.getName()%></p>
-        <p>Тип:<%= car.getType()%></p>
+        <p>Название:<%= car.getBrand()%></p>
+        <p>Тип:<%= car.getModel()%></p>
         <p>Дата создания: <%= car.getCreateDateTime()%></p>
         <p>Дата обновления: <%= car.getUpdateDateTime()%></p>
         <%}%>
