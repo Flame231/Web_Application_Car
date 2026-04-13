@@ -20,6 +20,8 @@ import java.util.Set;
  */
 public class showAllCars extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
         CarService carService = new CarServiceImpl();
         List<Car> carSet = carService.showAllCars();
         request.setAttribute("carList",carSet);

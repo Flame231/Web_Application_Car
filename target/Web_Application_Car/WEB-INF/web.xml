@@ -22,16 +22,20 @@
         <servlet-name>removeCar</servlet-name>
         <servlet-class>org.example.controller.removeCar</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>updateCar</servlet-name>
+        <servlet-class>org.example.controller.updateCar</servlet-class>
+    </servlet>
 
 
     <servlet-mapping>
         <servlet-name>registerCar</servlet-name>
-        <url-pattern>/register</url-pattern>
+        <url-pattern>/registerCar</url-pattern>
     </servlet-mapping>
 
     <servlet-mapping>
         <servlet-name>showAllCars</servlet-name>
-        <url-pattern>/showAll</url-pattern>
+        <url-pattern>/showAllCars</url-pattern>
     </servlet-mapping>
 
     <servlet-mapping>
@@ -42,6 +46,11 @@
     <servlet-mapping>
         <servlet-name>removeCar</servlet-name>
         <url-pattern>/removeCar</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>updateCar</servlet-name>
+        <url-pattern>/updateCar</url-pattern>
     </servlet-mapping>
 
     <welcome-file-list>

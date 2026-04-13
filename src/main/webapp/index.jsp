@@ -57,9 +57,9 @@
     <h1>База данных автомобилей</h1>
     <fieldset style="border: 2px solid #ccc; padding: 20px; border-radius: 8px;">
         <h2>Добавление автомобиля в базу</h2>
-        <form class="my-form" action="register" method="post">
-            Название авто:<input name="name" type="text" required placeholder="Напр: BMW"/></br>
-            Тип:<input name="type" type="text" required placeholder="Напр: Седан"/>
+        <form class="my-form" action="registerCar" method="post">
+            Марка:<input name="name" type="text" required placeholder="Напр: BMW"/></br>
+            Модель:<input name="type" type="text" required placeholder="Напр: Седан"/>
             <input type="submit" value="Сохранить автомобиль">
         </form>
     </fieldset>
@@ -68,16 +68,28 @@
     <fieldset style="border: 2px solid #ccc; padding: 20px; border-radius: 8px;">
         <form method="post">
             <h2>Поиск записи</h2>
-            Введите номер записи:<input type="search" name="id" required placeholder="Напр: 2"
-                <% if (request.getAttribute("id") != null) {%>    value="<%=request.getAttribute("id")%>"<%}%>
-        />
+            <div>Введите номер записи:<input type="search" name="id" required placeholder="Напр: 2"
+                    <% if (request.getAttribute("id") != null) {%>
+                                             value="<%=request.getAttribute("id")%>"<%}%>
+            /></div>
+            <% if (request.getAttribute("id") != null) {%>
+            <div><input type="submit" value="Обновить" formaction="updateCar"></div>
+            <div>Марка:<input type="text" name="brand"></div>
+            <div>Модель:<input type="text" name="model"></div>
+            <%}%>
+            <% if ("true".equals(request.getParameter("updated"))) { %>
+            <div style="color: green; font-weight: bold;">
+                Запись обновлена!
+            </div>
+            <% } %>
             <% if ("false".equals(request.getAttribute("found"))) { %>
             <div style="color: red;">Запись не найдена!</div>
             <% } %>
 
 
-            <input type="submit" value="Найти" formaction="findCar">
-            <input type="submit" value="Удалить запись" formaction="removeCar">
+            <div><input type="submit" value="Найти" formaction="findCar"></div>
+
+            <div><input type="submit" value="Удалить запись" formaction="removeCar"></div>
             <% if ("true".equals(request.getParameter("deleted"))) { %>
             <div style="color: green; font-weight: bold;">
                 Запись успешно удалена!
@@ -106,7 +118,7 @@
 
 
     <fieldset style="border: 2px solid #ccc; padding: 20px; border-radius: 8px;">
-        <form action="showAll" method="post">
+        <form action="showAllCars" method="post">
             <button type="submit">Посмотреть базу автомобилей</button>
         </form>
     </fieldset>
