@@ -74,26 +74,45 @@
 
             <% if ("true".equals(request.getParameter("saved"))) { %>
             <!-- Сообщению даем верхний отступ, чтобы оно не липло к кнопке -->
-            <div style="color: green; font-weight: bold; margin-top: 15px; display: block;">
+            <div></div>
+            <div style="color: green; font-weight: bold;">
                 Запись сохранена!
             </div>
             <% } %>
         </form>
     </fieldset>
 
-
     <%Car car = (Car) request.getAttribute("car");%>
-    <fieldset style="border: 2px solid #ccc; padding: 20px; border-radius: 8px;">
-        <form method="post">
+    <fieldset style="border: 2px solid #ccc; padding: 20px; border-radius: 8px;  display: flex;
+    flex-direction: column;
+    gap: 10px;">
+        <form method="post" style="display: flex; flex-direction: column; gap: 10px;">
             <h2>Поиск записи</h2>
-            <div>Введите номер записи:<input type="search" name="id" required placeholder="Напр: 2"
-                    <% if (request.getAttribute("id") != null) {%>
-                                             value="<%=request.getAttribute("id")%>"<%}%>
-            /></div>
+
+            <!-- Используем flex для выравнивания текста и инпута внутри строки -->
+            <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                <span>Введите номер записи:</span>
+                <input type="search" name="id" <% if (request.getAttribute("id") != null)
+                {%> value="<%= request.getAttribute("id")%>"<%}%> required style="flex-grow: 1;">
+            </div>
+
+            <div><input type="submit" value="Найти" formaction="findCar" style="width: 100%;"></div>
+
             <% if (request.getAttribute("id") != null) {%>
-            <div><input type="submit" value="Обновить" formaction="updateCar"></div>
-            <div>Марка:<input type="text" name="brand"></div>
-            <div>Модель:<input type="text" name="model"></div>
+            <div><input type="submit" value="Удалить запись" formaction="removeCar" style="width: 100%;"></div>
+            <h3>Обновление записи</h3>
+            <div><input type="submit" value="Обновить" formaction="updateCar" style="width: 100%;"></div>
+
+
+            <!-- Одинаковая ширина для подписей (label) выровняет поля -->
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <span style="min-width: 60px;">Марка:</span>
+                <input type="text" name="brand" style="flex-grow: 1;">
+            </div>
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <span style="min-width: 60px;">Модель:</span>
+                <input type="text" name="model" style="flex-grow: 1;">
+            </div>
             <%}%>
             <% if ("true".equals(request.getParameter("updated"))) { %>
             <div style="color: green; font-weight: bold;">
@@ -105,9 +124,9 @@
             <% } %>
 
 
-            <div><input type="submit" value="Найти" formaction="findCar"></div>
 
-            <div><input type="submit" value="Удалить запись" formaction="removeCar"></div>
+
+
             <% if ("true".equals(request.getParameter("deleted"))) { %>
             <div style="color: green; font-weight: bold;">
                 Запись удалена!
@@ -126,14 +145,16 @@
         </p>
         <p>Дата создания: <%= car.getCreateDateTime()%>
         </p>
-        <p>Дата обновления: <%= car.getUpdateDateTime()%>
+        <p>Дата обновления:
+            <%if(car.getUpdateDateTime()!=null){%>
+            <%= car.getUpdateDateTime()%>
+            <%}%>
         </p>
         <h3>Обновить</h3>
 
         <%}%>
 
     </fieldset>
-
 
     <fieldset style="border: 2px solid #ccc; padding: 20px; border-radius: 8px;">
         <form action="showAllCars" method="post">

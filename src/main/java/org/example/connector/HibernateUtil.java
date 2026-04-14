@@ -13,7 +13,7 @@ public class HibernateUtil {
         return ENTITY_MANAGER_FACTORY.createEntityManager();
     }
 
-    public static void close() {
+    public static void closeFactory() {
         ENTITY_MANAGER_FACTORY.close();
     }
 }

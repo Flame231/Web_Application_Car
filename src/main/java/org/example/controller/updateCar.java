@@ -1,31 +1,29 @@
 package org.example.controller;
 
+import jakarta.persistence.EntityManager;
 import org.example.connector.HibernateUtil;
-import org.example.dao.CarDAO;
-import org.example.dao.CarDAOImpl;
 import org.example.model.Car;
+import org.example.service.CarService;
+import org.example.service.CarServiceImpl;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-/**
- * Hello world!
- *
- */
 public class updateCar extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
-        CarDAO carDAO = new CarDAOImpl(HibernateUtil.getEntityManager());
-       String id = request.getParameter("id");
-        Car car = carDAO.get(Integer.parseInt(id));
+        EntityManager em = HibernateUtil.getEntityManager();
+        CarService carService = new CarServiceImpl(em);
+        String id = request.getParameter("id");
+        Car car = carService.findCar(Integer.parseInt(id));
         car.setBrand(request.getParameter("brand"));
         car.setModel(request.getParameter("model"));
-        carDAO.update(car);
+        carService.updateCar(car);
         response.sendRedirect("index.jsp?updated=true");
-        }
+        em.close();
     }
+}

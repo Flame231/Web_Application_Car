@@ -1,26 +1,26 @@
 package org.example.controller;
 
+import jakarta.persistence.EntityManager;
 import org.example.connector.HibernateUtil;
-import org.example.dao.CarDAO;
-import org.example.dao.CarDAOImpl;
 import org.example.model.Car;
+import org.example.service.CarService;
+import org.example.service.CarServiceImpl;
+import org.w3c.dom.ls.LSOutput;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-/**
- * Hello world!
- *
- */
 public class removeCar extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        CarDAO carDAO = new CarDAOImpl(HibernateUtil.getEntityManager());
+        EntityManager em = HibernateUtil.getEntityManager();
+        CarService carService = new CarServiceImpl(em);
         String id = request.getParameter("id");
-        carDAO.delete(Integer.parseInt(id));
+        Car car = carService.findCar(Integer.parseInt(id));
+        carService.removeCar(car);
         response.sendRedirect("index.jsp?deleted=true");
+        em.close();
     }
 }

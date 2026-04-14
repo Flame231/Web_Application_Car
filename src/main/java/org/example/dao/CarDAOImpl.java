@@ -8,6 +8,12 @@ import org.example.model.Car;
 import java.util.List;
 
 public class CarDAOImpl extends DAOImpl<Car> implements CarDAO {
+
+    private EntityManager em;
+    public CarDAOImpl(EntityManager em) {
+        super(Car.class,em);
+    }
+
     @Override
     public List<Car> getCarList() {
         return getEm().createQuery("from Car car", Car.class)
@@ -21,8 +27,5 @@ public class CarDAOImpl extends DAOImpl<Car> implements CarDAO {
         return query.getResultList();
     }
 
-    public CarDAOImpl(EntityManager em) {
-        super(em, Car.class);
 
-    }
 }
