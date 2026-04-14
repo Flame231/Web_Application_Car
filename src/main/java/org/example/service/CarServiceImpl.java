@@ -5,6 +5,7 @@ import org.example.dao.CarDAO;
 import org.example.dao.CarDAOImpl;
 import org.example.model.Car;
 
+import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
 
@@ -42,4 +43,26 @@ public class CarServiceImpl implements CarService {
         return Collections.emptyList();
     }
 
+    @Override
+    public void save(Car car) {
+
+    }
+
+    @Override
+    public Car get(Serializable id) {
+         return carDAO.get(id);
+    }
+
+    @Override
+    public void update(Car car) {
+        if (carDAO.get(car.getId()) != null) {
+            carDAO.update(car);
+        }
+
+    }
+
+    @Override
+    public void delete(Serializable id) {
+        carDAO.delete(id);
+    }
 }
