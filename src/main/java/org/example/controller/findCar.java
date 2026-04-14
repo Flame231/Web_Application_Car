@@ -13,6 +13,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.nio.file.PathMatcher;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 public class findCar extends HttpServlet {
@@ -22,19 +26,30 @@ public class findCar extends HttpServlet {
         EntityManager em = HibernateUtil.getEntityManager();
         CarService carService = new CarServiceImpl(em);
 
-        String id = request.getParameter("id");
+        String searchWord = request.getParameter("id");
 
-        Car car = null;
-        try {
-            car = carService.findCar(id);
-            request.setAttribute("car", car);
-            request.setAttribute("found", "true");
-            request.setAttribute("id", id);
-        } catch (EntityNotFoundException e) {
-            request.setAttribute("found", "false"); // Кладем флаг во внутренний атрибут
+        Pattern pattern = Pattern.compile(searchWord);
+        Matcher matcher = pattern.matcher("\\d+");
+        if (matcher.find()) {
+            Car car = null;
+            try {
+                car = carService.findCar(searchWord);
+                request.setAttribute("car", car);
+                request.setAttribute("found", "true");
+                request.setAttribute("id", searchWord);
+            } catch (EntityNotFoundException e) {
+                request.setAttribute("found", "false"); // Кладем флаг во внутренний атрибут
+            }
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
+            dispatcher.forward(request, response);
+        } else {
+            List<Car> carSet = carService.showCarsByBrand(searchWord);
+            request.setAttribute("carList", carSet);
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/CarsDatabase.jsp");
+            dispatcher.forward(request, response);
         }
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
-        dispatcher.forward(request, response);
+
+
         em.close();
     }
 }

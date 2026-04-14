@@ -91,7 +91,7 @@
 
             <!-- Используем flex для выравнивания текста и инпута внутри строки -->
             <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px;">
-                <span>Введите номер записи:</span>
+                <span>Введите номер записи или марку автомобиля:</span>
                 <input type="search" name="id" <% if (request.getAttribute("id") != null)
                 {%> value="<%= request.getAttribute("id")%>"<%}%> required style="flex-grow: 1;">
             </div>
