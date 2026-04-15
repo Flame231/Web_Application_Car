@@ -1,6 +1,5 @@
-package org.example.model;
+package org.example.dto;
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,36 +7,29 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.sql.Timestamp;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-public class Car {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
+public class CarDTO {
+
     private Integer id;
 
-    @Column
     private String brand;
 
-    @Column
     private String model;
 
-    @CreationTimestamp
-    private Timestamp createDateTime;
+    private Timestamp createDateTime = null;
 
-    @UpdateTimestamp
-    private Timestamp updateDateTime;
+    private Timestamp updateDateTime = null;
 
-
-    public Car(String brand, String model) {
+    public CarDTO(String brand, String model) {
         this.brand = brand;
         this.model = model;
     }
 
-    public Car(Integer id, String brand, String model) {
+    public CarDTO(Integer id, String brand, String model) {
         this.id = id;
         this.brand = brand;
         this.model = model;
@@ -45,7 +37,7 @@ public class Car {
 
     @Override
     public String toString() {
-        return "Car{" +
+        return "CarDTO{" +
                 "id=" + id +
                 ", brand='" + brand + '\'' +
                 ", model='" + model + '\'' +

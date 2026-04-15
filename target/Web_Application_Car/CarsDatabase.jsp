@@ -1,5 +1,6 @@
 <%@ page import="org.example.model.Car" %>
 <%@ page import="java.util.List" %>
+<%@ page import="org.example.dto.CarDTO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <style>
 
@@ -57,11 +58,11 @@
     <tbody>
     <%
         // Получаем список из request, который положил туда Сервлет
-        List<Car> cars = (List<Car>) request.getAttribute("carList");
+        List<CarDTO> cars = (List<CarDTO>) request.getAttribute("carList");
 
         // Проверяем, что список не null, чтобы не было ошибки
         if (cars != null && !cars.isEmpty()) {
-            for (Car car : cars) {
+            for (CarDTO car : cars) {
     %>
     <tr>
         <td><%= car.getId() %>

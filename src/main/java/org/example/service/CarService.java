@@ -1,25 +1,27 @@
 package org.example.service;
 
-import org.example.dao.DAO;
+import org.example.dto.CarDTO;
 import org.example.model.Car;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Set;
 
 public interface CarService {
 
-    void registerCar(Car car);
+    CarDTO toCarDTO(Car car);
+
+    Car toCarEntity(CarDTO carDTO);
+
+    void registerCar(CarDTO carDTO);
 
     Car findCar(Serializable id);
 
-    void updateCar(Car car);
+    void updateCar(CarDTO carDTO);
 
-    void removeCar(Car car);
+    void removeCar(Serializable id);
 
-    List<Car> showAllCars();
+    List<CarDTO> showAllCars();
 
     List<Car> showCarsByBrand(String brand);
-
 
 }

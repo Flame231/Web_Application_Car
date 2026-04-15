@@ -60,11 +60,11 @@
         <form class="my-form" action="registerCar" method="post">
             Марка:<br/>
             <div>
-                <input name="name" type="text" required placeholder="Напр: BMW" style="width: 100%; margin-bottom: 10px;"/>
+                <input name="brand" type="text" required placeholder="Напр: BMW" style="width: 100%; margin-bottom: 10px;"/>
             </div>
             Модель:<br/>
             <div>
-                <input name="type" type="text" required placeholder="Напр: Седан" style="width: 100%; margin-bottom: 10px;"/>
+                <input name="model" type="text" required placeholder="Напр: Седан" style="width: 100%; margin-bottom: 10px;"/>
             </div>
 
             <!-- Кнопку в отдельный блок -->
@@ -139,9 +139,9 @@
         <h3>Результаты поиска</h3>
         <p>Номер записи:<%= car.getId()%>
         </p>
-        <p>Название:<%= car.getBrand()%>
+        <p>Марка:<%= car.getBrand()%>
         </p>
-        <p>Тип:<%= car.getModel()%>
+        <p>Модель:<%= car.getModel()%>
         </p>
         <p>Дата создания: <%= car.getCreateDateTime()%>
         </p>

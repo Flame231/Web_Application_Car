@@ -1,31 +1,37 @@
 package org.example.service;
 
-import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityNotFoundException;
-import jakarta.persistence.Id;
 import org.example.dao.CarDAO;
 import org.example.dao.CarDAOImpl;
+import org.example.dto.CarDTO;
 import org.example.model.Car;
 
 import java.io.Serializable;
-import java.nio.channels.ScatteringByteChannel;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class CarServiceImpl implements CarService {
-    CarDAO carDAO;
-    EntityManager em;
 
-    public CarServiceImpl(EntityManager em) {
-        carDAO = new CarDAOImpl(em);
-        this.em = em;
+    CarDAO carDAO = new CarDAOImpl();
+
+    @Override
+    public CarDTO toCarDTO(Car car) {
+
+        return new CarDTO(car.getId(), car.getBrand(),
+                car.getModel(), car.getCreateDateTime(), car.getUpdateDateTime());
     }
 
     @Override
-    public void registerCar(Car car) {
-        em.getTransaction().begin();
-            carDAO.save(car);
-        em.getTransaction().commit();
+    public Car toCarEntity(CarDTO carDTO) {
+
+        return new Car(carDTO.getId(), carDTO.getBrand(), carDTO.getModel());
+    }
+
+    @Override
+    public void registerCar(CarDTO carDTO) {
+        Car car = toCarEntity(carDTO);
+        carDAO.save(car);
     }
 
     @Override
@@ -38,13 +44,15 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public List<Car> showAllCars() {
-        em.getTransaction().begin();
-        if (carDAO.getCarList() != null) {
-            return carDAO.getCarList();
+    public List<CarDTO> showAllCars() {
+
+        List<CarDTO> carDTOList = new ArrayList<>();
+        List<Car> carList = carDAO.getCarList();
+        for(Car car: carList) {
+            CarDTO carDTO = toCarDTO(car);
+            carDTOList.add(carDTO);
         }
-        em.getTransaction().commit();
-        return Collections.emptyList();
+        return carDTOList;
     }
 
     @Override
@@ -56,18 +64,15 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public void updateCar(Car car) {
-        em.getTransaction().begin();
-        if (carDAO.get(car.getId()) != null) {
-            carDAO.update(car);
-        }
-        em.getTransaction().commit();
+    public void updateCar(CarDTO carDTO) {
+        Car car = carDAO.get(carDTO.getId());
+        car.setBrand(carDTO.getBrand());
+        car.setModel(carDTO.getModel());
+        carDAO.update(car);
     }
 
     @Override
-    public void removeCar(Car car) {
-        em.getTransaction().begin();
-        carDAO.delete(car.getId());
-        em.getTransaction().commit();
+    public void removeCar(Serializable id) {
+        carDAO.delete(id);
     }
 }

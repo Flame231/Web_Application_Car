@@ -23,14 +23,12 @@ public class findCar extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
-        EntityManager em = HibernateUtil.getEntityManager();
-        CarService carService = new CarServiceImpl(em);
-
+        CarService carService = new CarServiceImpl();
         String searchWord = request.getParameter("id");
-
-        Pattern pattern = Pattern.compile(searchWord);
-        Matcher matcher = pattern.matcher("\\d+");
-        if (matcher.find()) {
+        Pattern pattern = Pattern.compile("\\d");
+        Matcher matcher = pattern.matcher(searchWord);
+        boolean b = matcher.find();
+        if (b) {
             Car car = null;
             try {
                 car = carService.findCar(searchWord);
@@ -49,7 +47,5 @@ public class findCar extends HttpServlet {
             dispatcher.forward(request, response);
         }
 
-
-        em.close();
     }
 }
