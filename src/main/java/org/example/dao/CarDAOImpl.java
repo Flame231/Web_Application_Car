@@ -13,14 +13,14 @@ public class CarDAOImpl extends DAOImpl<Car> implements CarDAO {
 
     @Override
     public List<Car> getCarList() {
-        super.getEm().clear();
-        return super.getEm().createQuery("from Car car", Car.class).getResultList();
+        getEm().clear();
+        return getEm().createQuery("from Car car", Car.class).getResultList();
     }
 
     @Override
     public List<Car> getCarsByBrand(String brand) {
-        super.getEm().clear();
-        Query query = super.getEm().createQuery("from Car car where car.brand =: brand", Car.class);
+        getEm().clear();
+        Query query = getEm().createQuery("from Car car where car.brand =: brand", Car.class);
         query.setParameter("brand", brand);
         return query.getResultList();
     }

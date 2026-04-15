@@ -1,6 +1,7 @@
 <%@ page import="org.w3c.dom.stylesheets.LinkStyle" %>
 <%@ page import="java.util.List" %>
 <%@ page import="org.example.model.Car" %>
+<%@ page import="org.example.dto.CarDTO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <style>
     fieldset {
@@ -82,7 +83,7 @@
         </form>
     </fieldset>
 
-    <%Car car = (Car) request.getAttribute("car");%>
+    <%CarDTO car = (CarDTO) request.getAttribute("car");%>
     <fieldset style="border: 2px solid #ccc; padding: 20px; border-radius: 8px;  display: flex;
     flex-direction: column;
     gap: 10px;">

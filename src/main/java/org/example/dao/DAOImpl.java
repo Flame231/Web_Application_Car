@@ -10,9 +10,12 @@ import java.io.Serializable;
 
 @Getter
 public class DAOImpl<T> implements DAO<T> {
-    private EntityManager em = HibernateUtil.getEntityManager();
+
     private Class<T> tclass;
 
+    protected EntityManager getEm() {
+        return HibernateUtil.getEntityManager();
+    }
     public DAOImpl(Class<T> tclass) {
         this.tclass = tclass;
     }
@@ -20,19 +23,19 @@ public class DAOImpl<T> implements DAO<T> {
     @Override
     public void save(T t) {
         begin();
-        em.persist(t);
+        getEm().persist(t);
         commit();
     }
 
     @Override
     public T get(Serializable id) {
-        return em.find(tclass, id);
+        return getEm().find(tclass, id);
     }
 
     @Override
     public void update(T t) {
         begin();
-        em.merge(t);
+        getEm().merge(t);
         commit();
     }
 
@@ -40,17 +43,18 @@ public class DAOImpl<T> implements DAO<T> {
     public void delete(Serializable id) {
         T t = this.get(id);
         begin();
-        em.remove(t);
+        getEm().remove(t);
         commit();
     }
 
     @Override
     public void begin() {
-        em.getTransaction().begin();
+        getEm().getTransaction().begin();
     }
 
     @Override
     public void commit() {
-        em.getTransaction().commit();
+        getEm().getTransaction().commit();
+        getEm().clear();
     }
 }

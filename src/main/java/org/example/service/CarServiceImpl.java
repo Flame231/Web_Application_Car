@@ -1,6 +1,7 @@
 package org.example.service;
 
 import jakarta.persistence.EntityNotFoundException;
+import lombok.Data;
 import org.example.dao.CarDAO;
 import org.example.dao.CarDAOImpl;
 import org.example.dto.CarDTO;
@@ -10,7 +11,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
+@Data
 public class CarServiceImpl implements CarService {
 
     CarDAO carDAO = new CarDAOImpl();

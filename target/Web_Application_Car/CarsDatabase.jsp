@@ -43,6 +43,9 @@
     <title>Список автомобилей</title>
     <h1>Список автомобилей</h1>
     <a href="index.jsp">Вернуться на главную страницу</a>
+    <form method="post" action="editPage.jsp" style="display: flex; flex-direction: column; gap: 10px;">
+        <div><input type="submit" value="Добавить запись" style="width: 100%;"></div>
+    </form>
 </head>
 <body>
 <table>
