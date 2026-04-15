@@ -35,12 +35,9 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public Car findCar(Serializable id) {
+    public CarDTO findCar(Serializable id) {
         Car car = carDAO.get(id);
-        if (car == null) {
-            throw new EntityNotFoundException("Автомобиль с id" + id + "не найден");
-        }
-        return car;
+        return toCarDTO(car);
     }
 
     @Override
@@ -48,7 +45,7 @@ public class CarServiceImpl implements CarService {
 
         List<CarDTO> carDTOList = new ArrayList<>();
         List<Car> carList = carDAO.getCarList();
-        for(Car car: carList) {
+        for (Car car : carList) {
             CarDTO carDTO = toCarDTO(car);
             carDTOList.add(carDTO);
         }
@@ -56,11 +53,15 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public List<Car> showCarsByBrand(String brand) {
-        if (carDAO.getCarsByBrand(brand) != null) {
-            return carDAO.getCarsByBrand(brand);
+    public List<CarDTO> showCarsByBrand(String brand) {
+        List<CarDTO> carDTOList = new ArrayList<>();
+        List<Car> carList = carDAO.getCarsByBrand(brand);
+        for (Car car : carList) {
+            CarDTO carDTO = toCarDTO(car);
+            carDTOList.add(carDTO);
         }
-        return Collections.emptyList();
+        return carDTOList;
+
     }
 
     @Override

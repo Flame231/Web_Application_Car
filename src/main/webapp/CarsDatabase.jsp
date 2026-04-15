@@ -53,6 +53,8 @@
         <th>Модель</th>
         <th>Дата создания</th>
         <th>Дата изменения</th>
+        <th>Редактировать</th>
+        <th>Удалить</th>
     </tr>
     </thead>
     <tbody>
@@ -75,6 +77,16 @@
         </td>
         <td><%= car.getUpdateDateTime() %>
         </td>
+        <td><form method="post" action="findCar" style="display: flex; flex-direction: column; gap: 10px;">
+                <div><input type="submit" value="Редактировать запись" style="width: 100%;"></div>
+                <input type="hidden" name="id" value="<%=car.getId()%>">
+                <input type="hidden" name="action" value="editPage">
+            </form>
+        </td>
+        <td><form method="post" action="removeCar" style="display: flex; flex-direction: column; gap: 10px;">
+            <div><input type="submit" value="Удалить запись" style="width: 100%;"></div>
+            <input type="hidden" name="id" value="<%=car.getId()%>">
+        </form></td>
     </tr>
     <%
         }

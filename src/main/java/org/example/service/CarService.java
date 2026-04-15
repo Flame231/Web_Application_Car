@@ -14,7 +14,7 @@ public interface CarService {
 
     void registerCar(CarDTO carDTO);
 
-    Car findCar(Serializable id);
+    CarDTO findCar(Serializable id);
 
     void updateCar(CarDTO carDTO);
 
@@ -22,6 +22,6 @@ public interface CarService {
 
     List<CarDTO> showAllCars();
 
-    List<Car> showCarsByBrand(String brand);
+    List<CarDTO> showCarsByBrand(String brand);
 
 }

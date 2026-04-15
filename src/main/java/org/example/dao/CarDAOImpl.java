@@ -19,6 +19,7 @@ public class CarDAOImpl extends DAOImpl<Car> implements CarDAO {
 
     @Override
     public List<Car> getCarsByBrand(String brand) {
+        super.getEm().clear();
         Query query = super.getEm().createQuery("from Car car where car.brand =: brand", Car.class);
         query.setParameter("brand", brand);
         return query.getResultList();

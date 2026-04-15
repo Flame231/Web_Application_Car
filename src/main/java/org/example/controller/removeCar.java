@@ -3,6 +3,7 @@ package org.example.controller;
 import org.example.service.CarService;
 import org.example.service.CarServiceImpl;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +16,10 @@ public class removeCar extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         Integer id = Integer.parseInt(request.getParameter("id"));
         carService.removeCar(id);
-        response.sendRedirect("index.jsp?deleted=true");
+
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/showAllCars");
+
+        dispatcher.forward(request, response);
+
     }
 }

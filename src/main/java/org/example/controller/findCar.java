@@ -3,6 +3,7 @@ package org.example.controller;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityNotFoundException;
 import org.example.connector.HibernateUtil;
+import org.example.dto.CarDTO;
 import org.example.model.Car;
 import org.example.service.CarService;
 import org.example.service.CarServiceImpl;
@@ -20,19 +21,27 @@ import java.util.regex.Pattern;
 
 
 public class findCar extends HttpServlet {
+    CarService carService = new CarServiceImpl();
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
+        if("editPage".equals(request.getParameter("action"))){
+            String searchWord = request.getParameter("id");
+            request.setAttribute("car", carService.findCar(searchWord));
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/editPage.jsp");
+            dispatcher.forward(request,response);
+        }
+/*
         CarService carService = new CarServiceImpl();
         String searchWord = request.getParameter("id");
         Pattern pattern = Pattern.compile("\\d");
         Matcher matcher = pattern.matcher(searchWord);
         boolean b = matcher.find();
         if (b) {
-            Car car = null;
+
             try {
-                car = carService.findCar(searchWord);
-                request.setAttribute("car", car);
+
+                request.setAttribute("car", carService.findCar(searchWord));
                 request.setAttribute("found", "true");
                 request.setAttribute("id", searchWord);
             } catch (EntityNotFoundException e) {
@@ -41,11 +50,11 @@ public class findCar extends HttpServlet {
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
             dispatcher.forward(request, response);
         } else {
-            List<Car> carSet = carService.showCarsByBrand(searchWord);
+            List<CarDTO> carSet = carService.showCarsByBrand(searchWord);
             request.setAttribute("carList", carSet);
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/CarsDatabase.jsp");
             dispatcher.forward(request, response);
-        }
+        }*/
 
     }
 }
