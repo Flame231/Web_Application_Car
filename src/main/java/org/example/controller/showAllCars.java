@@ -14,12 +14,8 @@ public class showAllCars extends HttpServlet {
     CarService carService = new CarServiceImpl();
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        response.setContentType("text/html;charset=UTF-8");
-        request.setCharacterEncoding("UTF-8");
-
         request.setAttribute("carList", carService.showAllCars());
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/CarsDatabase.jsp");
-
         dispatcher.forward(request, response);
     }
 }

@@ -114,6 +114,7 @@
             </div>
 
             <div><input type="submit" value="Найти" formaction="findCar" style="width: 100%;"></div>
+            <input type="hidden" name="action" value="indexPage">
 
 
             <% if (carDTO != null) { %>
@@ -147,7 +148,6 @@
             <div style="color: red;">Запись не найдена!</div>
             <% } %>
 
-
             <% if ("true".equals(request.getParameter("deleted"))) { %>
             <div style="color: green; font-weight: bold;">
                 Запись удалена!
@@ -171,7 +171,6 @@
             <%= carDTO.getUpdateDateTime()%>
             <%}%>
         </p>
-        <h3>Обновить</h3>
 
         <%}%>
 

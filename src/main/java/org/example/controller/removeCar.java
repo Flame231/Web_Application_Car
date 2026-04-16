@@ -16,9 +16,7 @@ public class removeCar extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         Integer id = Integer.parseInt(request.getParameter("id"));
         carService.removeCar(id);
-
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/showAllCars");
-
         dispatcher.forward(request, response);
 
     }

@@ -16,35 +16,24 @@ public class updateCar extends HttpServlet {
     CarService carService = new CarServiceImpl();
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        response.setContentType("text/html;charset=UTF-8");
-        request.setCharacterEncoding("UTF-8");
         if ("editPage".equals(request.getParameter("action"))) {
-
-
             Integer id = Integer.parseInt(request.getParameter("id"));
             String brand = request.getParameter("brand");
             String model = request.getParameter("model");
-
             CarDTO carDTO = carService.findCar(id);
             carDTO.setBrand(brand);
             carDTO.setModel(model);
             request.setAttribute("car", carDTO);
             carService.updateCar(carDTO);
-
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/showAllCars");
             dispatcher.forward(request, response);
             return;
         }
 
-        response.setContentType("text/html;charset=UTF-8");
-        request.setCharacterEncoding("UTF-8");
-
         Integer id = Integer.parseInt(request.getParameter("id"));
-
         String brand = request.getParameter("brand");
         String model = request.getParameter("model");
         CarDTO carDTO = new CarDTO(id, brand, model);
-
         carService.updateCar(carDTO);
         response.sendRedirect("index.jsp?updated=true");
     }

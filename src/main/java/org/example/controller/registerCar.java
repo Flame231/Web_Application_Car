@@ -16,15 +16,13 @@ public class registerCar extends HttpServlet {
     CarService carService = new CarServiceImpl();
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        response.setContentType("text/html;charset=UTF-8");
-        request.setCharacterEncoding("UTF-8");
 
         String brand = request.getParameter("brand");
         String model = request.getParameter("model");
 
         CarDTO carDTO = new CarDTO(brand, model);
         carService.registerCar(carDTO);
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/showAllCars");
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
         dispatcher.forward(request, response);
 
     }
