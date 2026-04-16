@@ -25,7 +25,7 @@ public class updateCar extends HttpServlet {
             carDTO.setModel(model);
             request.setAttribute("car", carDTO);
             carService.updateCar(carDTO);
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/showAllCars");
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/editPage.jsp?updated=true");
             dispatcher.forward(request, response);
             return;
         }

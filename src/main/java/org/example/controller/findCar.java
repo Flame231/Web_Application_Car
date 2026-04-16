@@ -24,7 +24,6 @@ public class findCar extends HttpServlet {
         if ("editPage".equals(request.getParameter("action"))) {
             String searchWord = request.getParameter("id");
             request.setAttribute("car", carService.findCar(searchWord));
-            System.out.println(carService.findCar(searchWord));
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/editPage.jsp");
             dispatcher.forward(request, response);
         } else if ("indexPage".equals(request.getParameter("action"))) {

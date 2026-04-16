@@ -17,7 +17,10 @@
     String carModel = "";
     String action = "registerCar";
     String action2 = "updateCar";
+    String formName = "Добавление автомобиля в базу";
+    String formName2 = "Обновление автомобиля в базе";
     if (request.getAttribute("car") != null) {
+        formName = formName2;
         action = action2; %>
 
 
@@ -28,11 +31,14 @@
 }
 %>
 <fieldset style="border: 2px solid #ccc; padding: 20px; border-radius: 8px; max-width: 400px;">
-    <h2>Добавление автомобиля в базу</h2>
-    <form class="my-form" action=<%=action%> method="post">
+    <h2><%=formName%>
+    </h2>
+    <form action="showAllCars" method="post">
+        <input type="submit" value="Назад">
+    </form>
+    <form class="my-form" method="post" action=<%=action%>>
 
         <p>Номер записи:</p>
-        <div></div>
         <p><%=carId%>
         </p>
         <input type="hidden" name="id" value="<%=carId%>"/>
@@ -53,7 +59,7 @@
             <input type="submit" value="Сохранить автомобиль" )/>
         </div>
 
-        <% if ("true".equals(request.getParameter("saved"))) { %>
+        <% if ("true".equals(request.getParameter("updated"))) { %>
         <!-- Сообщению даем верхний отступ, чтобы оно не липло к кнопке -->
         <div></div>
         <div style="color: green; font-weight: bold;">

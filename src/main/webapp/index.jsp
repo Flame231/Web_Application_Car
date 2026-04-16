@@ -120,7 +120,7 @@
             <% if (carDTO != null) { %>
             <div><input type="submit" value="Удалить запись" formaction="removeCar" style="width: 100%;"></div>
             <h3>Обновление записи</h3>
-            <div><input type="submit" value="Обновить" formaction="updateCar" style="width: 100%;"></div>
+
 
 
             <!-- Одинаковая ширина для подписей (label) выровняет поля -->
@@ -153,25 +153,24 @@
                 Запись удалена!
             </div>
             <% } %>
+            <% if (carDTO != null) {%>
+            <h3>Результаты поиска</h3>
+            <p>Номер записи:<%= carDTO.getId()%>
+            </p>
+            <p>Марка:<%= carDTO.getBrand()%>
+            </p>
+            <p>Модель:<%= carDTO.getModel()%>
+            </p>
+            <p>Дата создания: <%= carDTO.getCreateDateTime()%>
+            </p>
+            <p>Дата обновления:
+                <%if (carDTO.getUpdateDateTime() != null) {%>
+                <%= carDTO.getUpdateDateTime()%>
+                <%}%>
+            </p>
+
+            <div><input type="submit" value="Обновить" formaction="updateCar" style="width: 100%;"></div>
         </form>
-
-
-        <% if (carDTO != null) {%>
-        <h3>Результаты поиска</h3>
-        <p>Номер записи:<%= carDTO.getId()%>
-        </p>
-        <p>Марка:<%= carDTO.getBrand()%>
-        </p>
-        <p>Модель:<%= carDTO.getModel()%>
-        </p>
-        <p>Дата создания: <%= carDTO.getCreateDateTime()%>
-        </p>
-        <p>Дата обновления:
-            <%if (carDTO.getUpdateDateTime() != null) {%>
-            <%= carDTO.getUpdateDateTime()%>
-            <%}%>
-        </p>
-
         <%}%>
 
     </fieldset>
