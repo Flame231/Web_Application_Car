@@ -38,7 +38,10 @@ public class CarServiceImpl implements CarService {
     @Override
     public CarDTO findCar(Serializable id) {
         Car car = carDAO.get(id);
-        return toCarDTO(car);
+        if (car == null) {
+            return null; // Просто возвращаем null, не вызывая конвертер
+        }
+        return toCarDTO(car); // Конвертируем, только если car != null
     }
 
     @Override

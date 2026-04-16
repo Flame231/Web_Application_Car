@@ -43,7 +43,10 @@
     <title>Список автомобилей</title>
     <h1>Список автомобилей</h1>
     <a href="index.jsp">Вернуться на главную страницу</a>
-    <form method="post" action="editPage.jsp" style="display: flex; flex-direction: column; gap: 10px;">
+    <br>
+    <br>
+    <form method="post" action="editPage.jsp"
+          style="display: flex; flex-direction: column; gap: 10px; max-width: 300px;">
         <div><input type="submit" value="Добавить запись" style="width: 100%;"></div>
     </form>
 </head>
@@ -80,16 +83,19 @@
         </td>
         <td><%= car.getUpdateDateTime() %>
         </td>
-        <td><form method="post" action="findCar" style="display: flex; flex-direction: column; gap: 10px;">
+        <td>
+            <form method="post" action="findCar" style="display: flex; flex-direction: column; gap: 10px;">
                 <div><input type="submit" value="Редактировать запись" style="width: 100%;"></div>
                 <input type="hidden" name="id" value="<%=car.getId()%>">
                 <input type="hidden" name="action" value="editPage">
             </form>
         </td>
-        <td><form method="post" action="removeCar" style="display: flex; flex-direction: column; gap: 10px;">
-            <div><input type="submit" value="Удалить запись" style="width: 100%;"></div>
-            <input type="hidden" name="id" value="<%=car.getId()%>">
-        </form></td>
+        <td>
+            <form method="post" action="removeCar" style="display: flex; flex-direction: column; gap: 10px;">
+                <div><input type="submit" value="Удалить запись" style="width: 100%;"></div>
+                <input type="hidden" name="id" value="<%=car.getId()%>">
+            </form>
+        </td>
     </tr>
     <%
         }

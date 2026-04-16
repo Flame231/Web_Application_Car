@@ -33,6 +33,7 @@ public class updateCar extends HttpServlet {
 
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/showAllCars");
             dispatcher.forward(request, response);
+            return;
         }
 
         response.setContentType("text/html;charset=UTF-8");

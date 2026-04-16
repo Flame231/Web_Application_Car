@@ -19,17 +19,17 @@
     String action2 = "updateCar";
     if (request.getAttribute("car") != null) {
         action = action2; %>
+
+
+<% CarDTO carDTO = (CarDTO) request.getAttribute("car");
+    carId = String.valueOf(carDTO.getId());
+    carBrand = carDTO.getBrand();
+    carModel = carDTO.getModel();
+}
+%>
 <fieldset style="border: 2px solid #ccc; padding: 20px; border-radius: 8px; max-width: 400px;">
     <h2>Добавление автомобиля в базу</h2>
-    <form class="my-form" action="<%=action%>" method="post">
-
-
-        <% CarDTO carDTO = (CarDTO) request.getAttribute("car");
-            carId = String.valueOf(carDTO.getId());
-            carBrand = carDTO.getBrand();
-            carModel = carDTO.getModel();
-        }
-        %>
+    <form class="my-form" action=<%=action%> method="post">
 
         <p>Номер записи:</p>
         <div></div>

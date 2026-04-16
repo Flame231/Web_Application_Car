@@ -3,6 +3,20 @@
 <%@ page import="org.example.model.Car" %>
 <%@ page import="org.example.dto.CarDTO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    String carId = "";
+    String carBrand = "";
+    String carModel = "";
+    String action = "registerCar";
+    String action2 = "updateCar";
+    CarDTO carDTO = (CarDTO) request.getAttribute("car");
+    if (carDTO != null) {
+        action = action2;
+        carId = String.valueOf(carDTO.getId());
+        carBrand = carDTO.getBrand();
+        carModel = carDTO.getModel();
+    }
+%>
 <style>
     fieldset {
         width: fit-content; /* Рамка подстроится под ширину формы */
@@ -61,16 +75,18 @@
         <form class="my-form" action="registerCar" method="post">
             Марка:<br/>
             <div>
-                <input name="brand" type="text" required placeholder="Напр: BMW" style="width: 100%; margin-bottom: 10px;"/>
+                <input name="brand" type="text" required placeholder="Напр: BMW"
+                       style="width: 100%; margin-bottom: 10px;"/>
             </div>
             Модель:<br/>
             <div>
-                <input name="model" type="text" required placeholder="Напр: Седан" style="width: 100%; margin-bottom: 10px;"/>
+                <input name="model" type="text" required placeholder="Напр: Седан"
+                       style="width: 100%; margin-bottom: 10px;"/>
             </div>
 
             <!-- Кнопку в отдельный блок -->
             <div style="margin-top: 10px; display: block;">
-                <input type="submit" value="Сохранить автомобиль")/>
+                <input type="submit" value="Сохранить автомобиль" )/>
             </div>
 
             <% if ("true".equals(request.getParameter("saved"))) { %>
@@ -83,7 +99,7 @@
         </form>
     </fieldset>
 
-    <%CarDTO car = (CarDTO) request.getAttribute("car");%>
+
     <fieldset style="border: 2px solid #ccc; padding: 20px; border-radius: 8px;  display: flex;
     flex-direction: column;
     gap: 10px;">
@@ -99,7 +115,8 @@
 
             <div><input type="submit" value="Найти" formaction="findCar" style="width: 100%;"></div>
 
-            <% if (request.getAttribute("id") != null) {%>
+
+            <% if (carDTO != null) { %>
             <div><input type="submit" value="Удалить запись" formaction="removeCar" style="width: 100%;"></div>
             <h3>Обновление записи</h3>
             <div><input type="submit" value="Обновить" formaction="updateCar" style="width: 100%;"></div>
@@ -107,12 +124,18 @@
 
             <!-- Одинаковая ширина для подписей (label) выровняет поля -->
             <div style="display: flex; align-items: center; gap: 10px;">
-                <span style="min-width: 60px;">Марка:</span>
-                <input type="text" name="brand" style="flex-grow: 1;">
+                <p>Номер записи:</p>
+               <p><%=request.getAttribute("id")%></p>
+
+
             </div>
+
+
             <div style="display: flex; align-items: center; gap: 10px;">
+                <span style="min-width: 60px;">Марка:</span>
+                <input type="text" name="brand" value="<%=carBrand%>" style="flex-grow: 1;">
                 <span style="min-width: 60px;">Модель:</span>
-                <input type="text" name="model" style="flex-grow: 1;">
+                <input type="text" name="model" value="<%=carModel%>" style="flex-grow: 1;">
             </div>
             <%}%>
             <% if ("true".equals(request.getParameter("updated"))) { %>
@@ -120,12 +143,9 @@
                 Запись обновлена!
             </div>
             <% } %>
-            <% if ("false".equals(request.getAttribute("found"))) { %>
+            <% if (carDTO == null && request.getParameter("id") != null) { %>
             <div style="color: red;">Запись не найдена!</div>
             <% } %>
-
-
-
 
 
             <% if ("true".equals(request.getParameter("deleted"))) { %>
@@ -136,19 +156,19 @@
         </form>
 
 
-        <% if (car != null) {%>
+        <% if (carDTO != null) {%>
         <h3>Результаты поиска</h3>
-        <p>Номер записи:<%= car.getId()%>
+        <p>Номер записи:<%= carDTO.getId()%>
         </p>
-        <p>Марка:<%= car.getBrand()%>
+        <p>Марка:<%= carDTO.getBrand()%>
         </p>
-        <p>Модель:<%= car.getModel()%>
+        <p>Модель:<%= carDTO.getModel()%>
         </p>
-        <p>Дата создания: <%= car.getCreateDateTime()%>
+        <p>Дата создания: <%= carDTO.getCreateDateTime()%>
         </p>
         <p>Дата обновления:
-            <%if(car.getUpdateDateTime()!=null){%>
-            <%= car.getUpdateDateTime()%>
+            <%if (carDTO.getUpdateDateTime() != null) {%>
+            <%= carDTO.getUpdateDateTime()%>
             <%}%>
         </p>
         <h3>Обновить</h3>
